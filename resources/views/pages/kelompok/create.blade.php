@@ -16,16 +16,36 @@
         @csrf
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
-                <div class="card-body"> 
-                    <div class="form-group">
-                        <label>Nama Kelompok</label>
-                        <input type="text" name="nama_kel" class="form-control">
+                <form class="needs-validation" novalidate="">
+                    <div class="card-body"> 
+                        <div class="form-group">
+                            <label>Periode</label>
+                            <select name="id_periode" class="form-control" required="">
+                            <option value="">Pilih Periode</option>
+                            @foreach ($periode as $item)
+                                <option value="{{$item->id_periode}}">
+                                    {{$item->periode}}
+                                </option>
+                            @endforeach
+                            </select>
+                        </div>                        
+                        <div class="form-group"> 
+                            <label>Nama Kelompok</label>
+                            <input type="text" name="nama_kel" class="form-control" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>Mentor</label>
+                            <select name="nim[]" class="form-control select2" multiple required="">
+                            <option value="">Pilih Mentor</option>
+                            @foreach ($mentor as $item)
+                                <option value="{{$item->nim}}">
+                                    {{$item->nim}} - {{$item->nama_mhs}}
+                                </option>
+                            @endforeach 
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Periode</label>
-                        <input type="text" name="id_periode" class="form-control">
-                    </div>
-                </div>
+                </form>
                 <div class="card-footer text-right">
                     <button class="btn btn-primary mr-1" type="submit">Submit</button>
                 </div>

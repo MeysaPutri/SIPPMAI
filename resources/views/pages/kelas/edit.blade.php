@@ -13,10 +13,22 @@
 @section('content')
 <div class="section-body">
     <form action="{{ route('update.kelas', $kelas->id_kelas) }}" method="POST">
-        @csrf
+        @csrf       
+        @method('patch')
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
                 <div class="card-body"> 
+                    <div class="form-group">
+                        <label>Periode</label>
+                        <select name="id_periode" class="form-control" required="">
+                            <option value="">Pilih Periode</option>
+                            @foreach ($periode as $item)
+                                <option value="{{$item->id_periode}}">
+                                    {{$item->periode}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label>Nama Kelas</label>
                         <input type="text" name="nama_kelas"  
@@ -28,14 +40,23 @@
                         class="form-control">
                     </div>
                     <div class="form-group">
+                        <label>Jumlah SKS</label>
+                        <select name="sks" class="form-control" required="">
+                            <option value="">Pilih Jumlah SKS</option>
+                                <option value="2 sks">2 sks</option>
+                                <option value="3 sks">3 sks</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label>Nama Dosen</label>
-                        <input type="text" name="id_dosen"  
-                        @if (old('id_dosen'))
-                        value="{{ (old('id_dosen')) }}"
-                        @else
-                        value="{{ $kelas->id_dosen }}" 
-                        @endif
-                        class="form-control">
+                        <select name="nip" class="form-control" required="">
+                            <option value="">Pilih Dosen</option>
+                            @foreach ($dosen as $item)
+                                <option value="{{$item->nip}}">
+                                    {{$item->nama_dosen}}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="card-footer text-right">
@@ -45,6 +66,10 @@
         </div>
     </form>
 </div>
-
+<script>
+    document.getElementsByName('nip')[0].value ="{{ $kelas->nip}}"
+    document.getElementsByName('id_periode')[0].value ="{{ $kelas->id_periode}}"
+    document.getElementsByName('sks')[0].value ="{{ $kelas->sks}}"
+</script>
 @endsection
 

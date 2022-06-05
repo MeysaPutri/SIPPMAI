@@ -25,17 +25,35 @@
                         @else
                         value="{{ $kelompok->nama_kel }}" 
                         @endif
-                        class="form-control">
+                        class="form-control" required="">
                     </div>
                     <div class="form-group">
                         <label>Periode</label>
-                        <input type="text" name="id_periode"  
-                        @if (old('id_periode'))
-                        value="{{ (old('id_periode')) }}"
-                        @else
-                        value="{{ $kelompok->id_periode }}" 
-                        @endif
-                        class="form-control">
+                        <select name="id_periode" class="form-control" required="">
+                        <option value="">Pilih Periode</option>
+                        @foreach ($periode as $item)
+                            <option value="{{$item->id_periode}}">
+                                {{$item->periode}}
+                            </option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Mentor</label>
+                        <select name="nim[]" class="form-control select2" multiple required="">
+                          <option value="">Pilih Mentor</option>
+                          @foreach ($mentor as $item)
+                            @if (in_array($item->nim, $itemMentor))
+                                <option value="{{$item->nim}}" selected="true">
+                                    {{$item->nim}} - {{$item->nama_mhs}}
+                                </option>
+                            @else
+                                <option value="{{$item->nim}}">
+                                    {{$item->nim}} - {{$item->nama_mhs}}
+                                </option>
+                            @endif                              
+                          @endforeach 
+                        </select>
                     </div>
                 </div>
                 <div class="card-footer text-right">
@@ -45,6 +63,8 @@
         </div>
     </form>
 </div>
-
+<script>
+      document.getElementsByName('id_periode')[0].value ="{{ $kelompok->id_periode}}"
+</script>
 @endsection
 

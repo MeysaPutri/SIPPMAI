@@ -14,11 +14,10 @@ class CreateDosensTable extends Migration
     public function up()
     {
         Schema::create('dosens', function (Blueprint $table) {
-            $table->bigIncrements('id_dosen');
-            $table->string('nip_nim');
-            $table->string('nama_dosen');
-            $table->string('no_hp');
-            $table->string('email');
+            $table->bigIncrements('nip', 20);
+            $table->string('nama_dosen', 50);
+            $table->string('no_hp', 20);
+            $table->string('email', 50);
             $table->timestamps();
         });
     }

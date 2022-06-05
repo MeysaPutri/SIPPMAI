@@ -1,5 +1,7 @@
 "use strict";
 
+
+
 (function($, window, i) {
   // Bootstrap 4 Modal
   $.fn.fireModal = function(options) {

@@ -1,30 +1,40 @@
 @extends('layouts.master')
-@section('title', 'Tambah Dosen')
+@section('title', 'Edit Dosen')
 @section('section-header')
 <div class="section-header">
-    <h1>Tambah Dosen PAI</h1>
+    <h1>Edit Dosen PAI</h1>
     <div class="section-header-breadcrumb">
       <div class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></div>
       <div class="breadcrumb-item"><a href="#">Data User</a></div>
       <div class="breadcrumb-item"><a href="{{ route('dosen') }}">Dosen PAI</a></div>
-      <div class="breadcrumb-item">Tambah</div>
+      <div class="breadcrumb-item">Edit</div>
     </div>
 </div>    
 @endsection
 @section('content')
 <div class="section-body">
-    <form action="{{ route('update.dosen', $dosen->id_dosen) }}" method="POST">
+    <form action="{{ route('update.dosen', $dosen->nip) }}" method="POST">
         @csrf
+        @if (count($errors) > 0)
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+        @endif
+        @method('patch')
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
                 <div class="card-body"> 
                     <div class="form-group">
                         <label>NIP</label>
-                        <input type="text" name="nip_nim"  
-                        @if (old('nip_nim'))
-                        value="{{ (old('nip_nim')) }}"
+                        <input type="text" name="nip"  
+                        @if (old('nip'))
+                        value="{{ (old('nip')) }}"
                         @else
-                        value="{{ $dosen->nip_nim }}" 
+                        value="{{ $dosen->nip }}" 
                         @endif
                         class="form-control">
                     </div>
@@ -54,9 +64,9 @@
                         @if (old('email'))
                         value="{{ (old('email')) }}"
                         @else
-                        value="{{ $dosen->email }}" 
+                        value="{{ $dosen->emaildosen }}" 
                         @endif
-                        class="form-control">
+                        class="form-control" required>
                     </div>
                 </div>
                 <div class="card-footer text-right">

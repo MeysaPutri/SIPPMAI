@@ -14,9 +14,9 @@ class CreateKelompoksTable extends Migration
     public function up()
     {
         Schema::create('kelompoks', function (Blueprint $table) {
-            $table->bigIncrements('id_kel');
-            $table->string('nama_kel');
-            $table->integer('id_periode');
+            $table->bigIncrements('id_kel', 20);
+            $table->string('id_periode', 20);
+            $table->string('nama_kel', 50);            
             $table->timestamps();
         });
     }

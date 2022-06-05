@@ -15,23 +15,13 @@ class CreateAmalanYaumisTable extends Migration
     {
         Schema::create('amalan_yaumis', function (Blueprint $table) {
             $table->bigIncrements('id_ay');
-            $table->string('id_mentor_mentee');
-            $table->string('pertemuan_ke');
-            $table->string('kehadiran');
-            $table->string('qiyamullail');
-            $table->string('shaum_nawafil');
-            $table->string('tilawah_alquran');
-            $table->string('hafalan_juz');
-            $table->string('wirid_matsurat');
-            $table->string('shalat_dhuha');
-            $table->string('shalat_berjamaah');
-            $table->string('membaca_buku_islami');
-            $table->string('riyadhoh');
-            $table->string('infak');
-            $table->string('agenda_ukhwah');
-            $table->string('shalat_rawatib');
+            $table->string('id_pertemuan', 20); 
+            $table->string('nim', 20);           
+            $table->string('id_aktifitas', 10);
+            $table->string('isian', 50);
+            $table->string('evaluasi', 100)->nullable();
+            $table->string('pengevaluasi', 50)->nullable();
             $table->timestamps();
-
         });
     }
 
